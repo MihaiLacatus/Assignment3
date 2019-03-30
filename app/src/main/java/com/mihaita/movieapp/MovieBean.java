@@ -14,26 +14,31 @@ public class MovieBean implements Serializable {
 
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + " (" +
-                    COLUMN_ID + " INTEGER," +
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     COLUMN_MOVIENAME + " TEXT," +
                     COLUMN_DESCRIPTION + " TEXT," +
                     COLUMN_RATING + " FLOAT," +
                     COLUMN_ACTIVE + " INTEGER)";
 
     private int movieID;
-    private static int lastMovieID;
     private String movieName;
     private String movieDescription;
     private boolean activeFlag;
     private float movieRating;
 
     public MovieBean(String movieName, String movieDescription, boolean activeFlag, float movieRating) {
-        this.movieID = getLastMovieID() +1;
         this.movieName = movieName;
         this.movieDescription = movieDescription;
         this.activeFlag = activeFlag;
         this.movieRating = movieRating;
-        setLastMovieID(movieID);
+    }
+
+    public MovieBean(int movieID, String movieName, String movieDescription, boolean activeFlag, float movieRating) {
+        this.movieID = movieID;
+        this.movieName = movieName;
+        this.movieDescription = movieDescription;
+        this.activeFlag = activeFlag;
+        this.movieRating = movieRating;
     }
 
     public MovieBean() { }
@@ -48,14 +53,6 @@ public class MovieBean implements Serializable {
 
     public int getMovieID() {
         return movieID;
-    }
-
-    public static int getLastMovieID() {
-        return lastMovieID;
-    }
-
-    public static void setLastMovieID(int lastMovieID) {
-        MovieBean.lastMovieID = lastMovieID;
     }
 
     public void setMovieID(int movieID) { this.movieID = movieID; }

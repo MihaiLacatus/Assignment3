@@ -19,7 +19,6 @@ public class DBClass extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(MovieBean.COLUMN_ID, movie.getMovieID());
         values.put(MovieBean.COLUMN_MOVIENAME, movie.getMovieName());
         values.put(MovieBean.COLUMN_DESCRIPTION, movie.getMovieDescription());
         values.put(MovieBean.COLUMN_RATING, movie.getMovieRating());
@@ -44,7 +43,7 @@ public class DBClass extends SQLiteOpenHelper {
         {
             do {
                 MovieBean foundMovie = new MovieBean();
-                foundMovie.setMovieID(foundMovie.getMovieID());
+                foundMovie.setMovieID(c.getInt(c.getColumnIndex(MovieBean.COLUMN_ID)));
                 foundMovie.setMovieName(c.getString(c.getColumnIndex(MovieBean.COLUMN_MOVIENAME)));
                 foundMovie.setMovieDescription(c.getString(c.getColumnIndex(MovieBean.COLUMN_DESCRIPTION)));
                 foundMovie.setMovieRating(c.getFloat((c.getColumnIndex(MovieBean.COLUMN_RATING))));

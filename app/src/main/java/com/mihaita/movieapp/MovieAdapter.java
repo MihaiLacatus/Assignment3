@@ -16,7 +16,6 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
     List<MovieBean> movieList;
-    float changeRatingBar;
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView movieID, movieName, movieDescription;
