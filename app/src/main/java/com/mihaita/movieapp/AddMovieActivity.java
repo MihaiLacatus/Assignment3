@@ -46,9 +46,6 @@ public class AddMovieActivity extends AppCompatActivity {
                 dbc.addMovie(newMovie);
 
                 Intent returnData = new Intent();
-//                returnData.putExtra("movieName",et_movieName.getText().toString());
-//                returnData.putExtra("movieDescription", et_movieDescription.getText().toString());
-//                returnData.putExtra("movieRating",String.valueOf(ratingBar.getRating()));
                 setResult(RESULT_OK,returnData);
                 AddMovieActivity.this.finish();
             }

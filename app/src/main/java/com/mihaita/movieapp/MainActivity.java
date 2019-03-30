@@ -24,6 +24,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // loading records from the data base on application boot
+        RecyclerView recycle = findViewById(R.id.recycle1);
+        movieAdapter = new MovieAdapter(movieList);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recycle.setLayoutManager(layoutManager);
+        recycle.setItemAnimator(new DefaultItemAnimator());
+        recycle.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+
+        DBClass db = new DBClass(this);
+        movieList.addAll(db.getMovies());
+        recycle.setAdapter(movieAdapter);
+
+
         Button btnAdd = findViewById(R.id.btn_addMovie);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent i = new Intent(getApplicationContext(), AddMovieActivity.class);
                 startActivityForResult(i, 1);
-
             }
         });
     }
