@@ -32,7 +32,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     }
 
     MovieAdapter(List<MovieBean> movieList) {
-
         this.movieList = movieList;
     }
 
@@ -67,11 +66,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         viewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 DBClass db = new DBClass(v.getContext());
+
+                //getting the movie from the list that we want to be inactive
                 db.updateFlagMovie(movieList.get(viewHolder.getAdapterPosition()));
 
-                //movie = movieList.get(viewHolder.getAdapterPosition());
-
+                //removing the movie from the list
                 movieList.remove(viewHolder.getAdapterPosition());
 
                 Toast.makeText(v.getContext(), "Record Deleted!"

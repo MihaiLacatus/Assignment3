@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // loading records from the data base on application boot
+        // loading records from the data base on application first boot
         RecyclerView recycle = findViewById(R.id.recycle1);
         movieAdapter = new MovieAdapter(movieList);
 
@@ -61,15 +61,18 @@ public class MainActivity extends AppCompatActivity {
                 RecyclerView recycle = findViewById(R.id.recycle1);
                 DBClass db = new DBClass(getApplicationContext());
 
-
                 if (isChecked) {
                     movieList.addAll(db.getMoviesInactive());
                     recycle.setAdapter(movieAdapter);
                     movieAdapter.notifyDataSetChanged();
+                    Toast.makeText(getApplicationContext(), "Inactive movies"
+                            , Toast.LENGTH_LONG).show();
                 } else {
                     movieList.addAll(db.getMoviesActive());
                     recycle.setAdapter(movieAdapter);
                     movieAdapter.notifyDataSetChanged();
+                    Toast.makeText(getApplicationContext(), "Active movies"
+                            , Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -78,19 +81,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
+
+            //clearing the list
+            movieList.clear();
+
             //loading all records with the recent added one
             RecyclerView recycle = findViewById(R.id.recycle1);
             movieAdapter = new MovieAdapter(movieList);
 
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-            recycle.setLayoutManager(layoutManager);
-            recycle.setItemAnimator(new DefaultItemAnimator());
-            recycle.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-
             DBClass db = new DBClass(this);
             movieList.addAll(db.getMoviesActive());
             recycle.setAdapter(movieAdapter);
-
 
             Toast.makeText(getApplicationContext(), "Record Added!"
                     , Toast.LENGTH_LONG).show();
