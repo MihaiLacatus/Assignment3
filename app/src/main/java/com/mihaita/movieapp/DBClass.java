@@ -94,9 +94,9 @@ public class DBClass extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(MovieBean.COLUMN_ACTIVE, false);
+        values.put(MovieBean.COLUMN_ACTIVE, 0);
 
-        db.update( MovieBean.TABLE_NAME,values,MovieBean.COLUMN_ACTIVE +" = ?",new String[]{Integer.toString(movie.getMovieID())});
+        db.update( MovieBean.TABLE_NAME,values,MovieBean.COLUMN_ID +" = ?",new String[]{Integer.toString(movie.getMovieID())});
 
         return movie;
     }

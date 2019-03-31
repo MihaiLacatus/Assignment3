@@ -68,7 +68,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
                 DBClass db = new DBClass(v.getContext());
-                db.updateFlagMovie(movie);
+                db.updateFlagMovie(movieList.get(viewHolder.getAdapterPosition()));
+
+                //movie = movieList.get(viewHolder.getAdapterPosition());
+
                 movieList.remove(viewHolder.getAdapterPosition());
 
                 Toast.makeText(v.getContext(), "Record Deleted!"
