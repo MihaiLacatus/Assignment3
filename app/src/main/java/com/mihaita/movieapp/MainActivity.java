@@ -9,7 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         recycle.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         DBClass db = new DBClass(this);
-        movieList.addAll(db.getMovies());
+        movieList.addAll(db.getMoviesActive());
         recycle.setAdapter(movieAdapter);
 
 
@@ -47,12 +49,36 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(i, 1);
             }
         });
+
+        //setting a listener for the toggle button
+        ToggleButton toggleButton = findViewById(R.id.toggleButton);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //clearing the list when toggling
+                movieList.clear();
+
+                RecyclerView recycle = findViewById(R.id.recycle1);
+                DBClass db = new DBClass(getApplicationContext());
+
+
+                if (isChecked) {
+                    movieList.addAll(db.getMoviesInactive());
+                    recycle.setAdapter(movieAdapter);
+                    movieAdapter.notifyDataSetChanged();
+                } else {
+                    movieList.addAll(db.getMoviesActive());
+                    recycle.setAdapter(movieAdapter);
+                    movieAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
-
+            //loading all records with the recent added one
             RecyclerView recycle = findViewById(R.id.recycle1);
             movieAdapter = new MovieAdapter(movieList);
 
@@ -62,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             recycle.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
             DBClass db = new DBClass(this);
-            movieList.addAll(db.getMovies());
+            movieList.addAll(db.getMoviesActive());
             recycle.setAdapter(movieAdapter);
 
 

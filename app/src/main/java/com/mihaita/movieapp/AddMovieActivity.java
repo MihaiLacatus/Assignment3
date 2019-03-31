@@ -22,7 +22,7 @@ public class AddMovieActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent noData = new Intent();
-                setResult(RESULT_CANCELED,noData);
+                setResult(RESULT_CANCELED, noData);
                 AddMovieActivity.this.finish();
             }
         });
@@ -46,7 +46,7 @@ public class AddMovieActivity extends AppCompatActivity {
                 dbc.addMovie(newMovie);
 
                 Intent returnData = new Intent();
-                setResult(RESULT_OK,returnData);
+                setResult(RESULT_OK, returnData);
                 AddMovieActivity.this.finish();
             }
         });

@@ -33,21 +33,32 @@ public class MovieBean implements Serializable {
         this.movieRating = movieRating;
     }
 
-    public MovieBean() { }
+    public MovieBean() {
+    }
 
-    public String getMovieDescription() { return movieDescription; }
+    public String getMovieDescription() {
+        return movieDescription;
+    }
 
-    public void setMovieDescription(String movieDescription) { this.movieDescription = movieDescription; }
+    public void setMovieDescription(String movieDescription) {
+        this.movieDescription = movieDescription;
+    }
 
-    public boolean isActiveFlag() { return activeFlag; }
+    public boolean isActiveFlag() {
+        return activeFlag;
+    }
 
-    public void setActiveFlag(boolean activeFlag) { this.activeFlag = activeFlag; }
+    public void setActiveFlag(boolean activeFlag) {
+        this.activeFlag = activeFlag;
+    }
 
     public int getMovieID() {
         return movieID;
     }
 
-    public void setMovieID(int movieID) { this.movieID = movieID; }
+    public void setMovieID(int movieID) {
+        this.movieID = movieID;
+    }
 
     public String getMovieName() {
         return movieName;
